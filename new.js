@@ -1,5 +1,6 @@
 const GRAVEDAD = 5;
 const ALTURA = 350;
+const ANCHO = 800;
 
 // const platforms = [
 //   { x: 0, y: 350, width: 800, height: 50 }, // ground
@@ -64,9 +65,9 @@ class Personaje {
 
   constructor() {
     this.x = 50;
-    this.y = 300;
-    this.width = 50;
-    this.height = 50;
+    this.y = 250;
+    this.width = 100;
+    this.height = 100;
     this.isMovingLeft = false; // Si el personaje se esta moviendo hacia la izquierda
     this.isMovingRight = false; // Si el personaje se esta moviendo hacia la derecha
     this.velocidadY = 0;
@@ -74,6 +75,9 @@ class Personaje {
     this.element = document.createElement("div");
     this.element.classList.add("personaje");
     this.actualizarPosicion();
+    setInterval(() => {
+      this.actualizarPosicion();
+    }, 1000 / 60); // 60 fps
   }
 
   mover(evento) {
@@ -120,20 +124,27 @@ class Personaje {
   }
 
   actualizarPosicion() {
-    setInterval(() => {
-      // Si el personaje se esta moviendo, actualizamos su posicion horizontal en base a la velocidad de movimiento
-      if (this.isMovingRight && !this.isMovingLeft) {
-        this.x += Personaje.velocidadMovimiento;
-      }
+    // Si el personaje se esta moviendo, actualizamos su posicion horizontal en base a la velocidad de movimiento
+    if (this.isMovingRight && !this.isMovingLeft) {
+      this.x += Personaje.velocidadMovimiento;
+    }
 
-      if (this.isMovingLeft && !this.isMovingRight) {
-        this.x -= Personaje.velocidadMovimiento;
-      }
+    if (this.isMovingLeft && !this.isMovingRight) {
+      this.x -= Personaje.velocidadMovimiento;
+    }
 
-      // Pintamos nueva posicion en pantalla actualizando los estilos
-      this.element.style.left = `${this.x}px`;
-      this.element.style.top = `${this.y}px`;
-    }, 1000 / 60); // 60 fps
+    //Que no se salga de los margenes
+    if(this.x < 0 ) {
+      this.x = 0;
+    } 
+
+    if(this.x > ANCHO - this.width) {
+      this.x = ANCHO - this.width;
+    }
+
+    // Pintamos nueva posicion en pantalla actualizando los estilos
+    this.element.style.left = `${this.x}px`;
+    this.element.style.top = `${this.y}px`;
   }
 
   colisionaCon(objeto) {
