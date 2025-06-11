@@ -26,7 +26,7 @@ body {
   height: 50px;
   background-color: #07a07c;
   border-radius: 50%;
-  border: 5px solid #07a050;
+  
 }
 
 .moneda {
@@ -38,9 +38,9 @@ body {
   box-shadow: 0 0 10px 2px rgba(255, 223, 0, 0.8);
 }
 
-.platforms {
-    position: absolute;
-  width: 30px;
+.plataforma {
+  position: absolute;
+  width: 100px;
   height: 30px;
   background-color: black;
 }
