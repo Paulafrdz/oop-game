@@ -7,7 +7,26 @@ const ANCHO = 800;
 //   { x: 200, y: 270, width: 120, height: 20 },
 //   { x: 400, y: 200, width: 120, height: 20 },
 // ];
+const bgMusic = new Audio('audio/game-music-loop-6-144641.mp3');
+bgMusic.loop = true;
+bgMusic.volume = 0.5;
 
+const playBtn = document.getElementById("playBtn");
+const pauseBtn = document.getElementById("pauseBtn");
+
+const musicCoin = new Audio('audio/coin-collision-sound-342335.mp3');
+musicCoin.volume = 0.7;
+
+playBtn.addEventListener("click", () => {
+    bgMusic.play()
+        .then(() => console.log("🎶 Música iniciada"))
+        .catch(e => console.error("❌ No se pudo reproducir:", e));
+});
+
+pauseBtn.addEventListener("click", () => {
+    bgMusic.pause();
+    console.log("⏸ Música pausada");
+});
 
 class Game {
   constructor() {
@@ -18,7 +37,7 @@ class Game {
     this.crearEscenario();
     this.agregarEventos();
     this.puntosElement = document.getElementById("puntos");
-
+    bgMusic.play();
   }
 
   crearEscenario() {
@@ -46,6 +65,8 @@ class Game {
           this.container.removeChild(moneda.element);
           this.monedas.splice(index, 1);
           this.actualizarPuntuacion(10);
+          musicCoin.currentTime = 0;
+          musicCoin.play();
 
         }
       });
@@ -60,7 +81,7 @@ class Game {
 }
 
 class Personaje {
-  static velocidadMovimiento = 15; // Velocidad de movimiento horizontal
+  static velocidadMovimiento = 10; // Velocidad de movimiento horizontal
   static velocidadSalto = 50; // Velocidad inicial de salto (se va reduciendo con la gravedad)
 
   constructor() {
@@ -157,6 +178,7 @@ class Personaje {
   }
 
 }
+
 
 class Moneda {
   constructor() {

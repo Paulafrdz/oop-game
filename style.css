@@ -2,7 +2,7 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   overflow: hidden;
-  background-color: #b8b8b8;
+  background-color: #dbdbdb;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,13 +10,30 @@ body {
   flex-direction: column;
 }
 
+
+button {
+    padding: 5px 10px;
+    font-size: 12px;
+    margin: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
 #game-container {
   position: relative;
   width: 800px;
   height: 400px;
   margin: 20px auto;
-  border: 10px solid #6d6d6d;
-  background: #fff;
+  border: 5px solid #6d6d6d;
+  background-image: url('sprites/79a4a4fc1a28b87d87030defc1e36c6f.jpg');
   overflow: hidden;
   border-radius: 30px;
 }
@@ -36,10 +53,15 @@ body {
   position: absolute;
   width: 30px;
   height: 30px;
-  background-color: gold;
+  background-image: url('sprites/original-a75cefebf868269513d83-unscreen.gif');
   border-radius: 50%;
-  box-shadow: 0 0 10px 2px rgba(255, 223, 0, 0.8);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100px 100px; 
 }
+
+
+
 
 .plataforma {
   position: absolute;
