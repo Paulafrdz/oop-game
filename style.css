@@ -2,14 +2,17 @@ body {
   margin: 0;
   font-family: Arial, sans-serif;
   overflow: hidden;
-  background-color: #dbdbdb;
+  background-image: url("https://i.pinimg.com/originals/b6/1b/5c/b61b5c55cc2019e3d90fd536745d66f5.gif");
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   flex-direction: column;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
-
+ 
 
 button {
     padding: 5px 10px;
@@ -20,6 +23,8 @@ button {
     border: none;
     background-color: #4CAF50;
     color: white;
+    box-sizing: 70px;
+    position: inline-block;
     
 }
 
@@ -36,6 +41,7 @@ button:hover {
   background-image: url('sprites/79a4a4fc1a28b87d87030defc1e36c6f.jpg');
   overflow: hidden;
   border-radius: 30px;
+  align-items: center;
 }
 
 .personaje {
@@ -61,11 +67,31 @@ button:hover {
 }
 
 
-
-
-.plataforma {
-  position: absolute;
-  width: 100px;
-  height: 30px;
-  background-color: black;
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
+  
+.win-message {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    padding-left: 70px;
+    padding-right: 70px;
+    text-align: center;
+}
+
+.win-message h2 {
+    margin-bottom: 20px;
+    color: #8f16cc;
+    font-size: 24px;
+}
+

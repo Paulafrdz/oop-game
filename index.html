@@ -7,12 +7,19 @@
     <link rel="stylesheet" href="style.css">
 
 <body>
-    <h1>Juego OOP</h1>
+    <h1>SpeedCat</h1>
     <div id="puntos"> Puntos: 0</div>
+    <div id="timer">Tiempo: <span>0</span>s</div>
+    <div id="game-container"></div>
+    <div >Música
     <button id="playBtn">▶ Play</button>
     <button id="pauseBtn">⏸ Pause</button>
-    <div id="game-container">
-
+    </div>   
+    <div id="win-overlay" class="overlay">
+        <div class="win-message">
+            <h2 id="win-message">Congratulations!</h2>
+            <button id="restart-btn">Play again</button>
+        </div>
     </div>
     <script type="module" src="new.js"></script>
 </body>

@@ -28,6 +28,7 @@ pauseBtn.addEventListener("click", () => {
     console.log("⏸ Música pausada");
 });
 
+
 class Game {
   constructor() {
     this.container = document.getElementById("game-container");
@@ -37,7 +38,17 @@ class Game {
     this.crearEscenario();
     this.agregarEventos();
     this.puntosElement = document.getElementById("puntos");
+    this.overlay = document.getElementById("win-overlay");
     bgMusic.play();
+    this.setTime = Date.now();
+    this.updateTime();
+    this.timerElement = document.querySelector("#timer span");
+    this.restartBtn = document.getElementById("restart-btn");
+    this.restartBtn.addEventListener("click", () => {
+    bgMusic.pause();
+    bgMusic.currentTime = 0;
+    location.reload();
+    });
   }
 
   crearEscenario() {
@@ -48,9 +59,14 @@ class Game {
       this.monedas.push(moneda);
       this.container.appendChild(moneda.element);
     }
-
-
   }
+
+    updateTime() {
+      setInterval(() => {
+        const time = Math.floor((Date.now() - this. setTime) / 1000);
+        this.timerElement.textContent = time;
+      }, 1000);
+    }
 
   agregarEventos() {
     window.addEventListener("keydown", (e) => this.personaje.mover(e));
@@ -68,17 +84,28 @@ class Game {
           musicCoin.currentTime = 0;
           musicCoin.play();
 
+          if (this.monedas.length === 0) {
+            this.mostrarVentanaGanadora();
+            const endTime = Math.floor((Date.now() - this.setTime) / 1000);
         }
+      }
       });
     }, 1000 / 60); // 60 fps
+  }
+
+  mostrarVentanaGanadora() {
+        this.overlay.style.display = 'flex';
+        const winMessage = document.getElementById('win-message'); 
+        this.gameStarted = false; 
   }
 
   actualizarPuntuacion(puntos) {
     this.puntuacion += puntos;
     this.puntosElement.textContent = `Puntos: ${this.puntuacion}`;
   }
-
+  
 }
+
 
 class Personaje {
   static velocidadMovimiento = 10; // Velocidad de movimiento horizontal
@@ -196,23 +223,6 @@ class Moneda {
     this.element.style.top = `${this.y}px`;
   }
 
-}
-
-class Plataforma {
-  constructor() {
-    this.x = Math.random() * 700 + 50;
-    this.y = Math.random() * 250 + 50;
-    this.width = 50;
-    this.height = 50;
-    this.element = document.createElement("div");
-    this.element.classList.add("plataforma");
-    this.actualizarPosicion();
-  }
-
-  actualizarPosicion() {
-    this.element.style.left = `${this.x}px`;
-    this.element.style.top = `${this.y}px`;
-  }
 }
 
 const juego = new Game();
