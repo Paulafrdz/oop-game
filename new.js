@@ -34,7 +34,6 @@ class Game {
     this.agregarEventos();
     this.puntosElement = document.getElementById("puntos");
     this.overlay = document.getElementById("win-overlay");
-    bgMusic.play();
     
     this.setTime = Date.now();
     this.timerInterval = null; 
