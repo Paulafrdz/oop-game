@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: 'pixelify Sans', sans-serif;
   overflow: hidden;
   background-image: url("https://i.pinimg.com/originals/b6/1b/5c/b61b5c55cc2019e3d90fd536745d66f5.gif");
   display: flex;
@@ -12,7 +12,14 @@ body {
   background-position: center;
   background-size: cover;
 }
- 
+h1 {
+  font-size: 40px;
+}
+
+#musica{
+  display: flex;
+  align-items: center;
+}
 
 button {
     padding: 5px 10px;
@@ -23,13 +30,19 @@ button {
     border: none;
     background-color: #4CAF50;
     color: white;
-    box-sizing: 70px;
-    position: inline-block;
-    
+    font-family: 'pixelify Sans', sans-serif;
 }
 
 button:hover {
     background-color: #45a049;
+}
+
+#pauseBtn{
+  height: 24px;
+}
+#playBtn{
+  height: 24px;
+  width: 60px;
 }
 
 #game-container {

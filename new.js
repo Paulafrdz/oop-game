@@ -2,11 +2,6 @@ const GRAVEDAD = 5;
 const ALTURA = 350;
 const ANCHO = 800;
 
-// const platforms = [
-//   { x: 0, y: 350, width: 800, height: 50 }, // ground
-//   { x: 200, y: 270, width: 120, height: 20 },
-//   { x: 400, y: 200, width: 120, height: 20 },
-// ];
 const bgMusic = new Audio('audio/game-music-loop-6-144641.mp3');
 bgMusic.loop = true;
 bgMusic.volume = 0.5;
@@ -86,7 +81,6 @@ class Game {
 
           if (this.monedas.length === 0) {
             this.mostrarVentanaGanadora();
-            const endTime = Math.floor((Date.now() - this.setTime) / 1000);
         }
       }
       });
