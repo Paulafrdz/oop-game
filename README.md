@@ -64,13 +64,13 @@ Incluye:
    git clone https://github.com/Paulafrdz/oop-game.git
 
 ## 🎮 Características principales
-✅ Control con teclado
-✅ Detección de colisiones entre personaje y monedas
-✅ Sistema de puntuación
-✅ Temporizador en tiempo real
-✅ Pantalla de victoria al recolectar todas las monedas
-✅ Botones para pausar/reproducir la música
-✅ Posición del personaje limitada al área del juego
+- ✅ Control con teclado
+- ✅ Detección de colisiones entre personaje y monedas
+- ✅ Sistema de puntuación
+- ✅ Temporizador en tiempo real
+- ✅ Pantalla de victoria al recolectar todas las monedas
+- ✅ Botones para pausar/reproducir la música
+- ✅ Posición del personaje limitada al área del juego
 
 ## 🔊 Sonidos
 🎵 Música de fondo: Loop continuo durante la partida (audio/game-music-loop-6-144641.mp3)
