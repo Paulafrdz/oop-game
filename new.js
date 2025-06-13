@@ -13,14 +13,14 @@ const musicCoin = new Audio('audio/coin-collision-sound-342335.mp3');
 musicCoin.volume = 0.7;
 
 playBtn.addEventListener("click", () => {
-    bgMusic.play()
-        .then(() => console.log("🎶 Música iniciada"))
-        .catch(e => console.error("❌ No se pudo reproducir:", e));
+  bgMusic.play()
+    .then(() => console.log("🎶 Música iniciada"))
+    .catch(e => console.error("❌ No se pudo reproducir:", e));
 });
 
 pauseBtn.addEventListener("click", () => {
-    bgMusic.pause();
-    console.log("⏸ Música pausada");
+  bgMusic.pause();
+  console.log("⏸ Música pausada");
 });
 
 
@@ -35,33 +35,59 @@ class Game {
     this.puntosElement = document.getElementById("puntos");
     this.overlay = document.getElementById("win-overlay");
     bgMusic.play();
+    
     this.setTime = Date.now();
+    this.timerInterval = null; 
     this.updateTime();
     this.timerElement = document.querySelector("#timer span");
+    
     this.restartBtn = document.getElementById("restart-btn");
+    this.initGame(); 
     this.restartBtn.addEventListener("click", () => {
-    bgMusic.pause();
-    bgMusic.currentTime = 0;
-    location.reload();
+      this.restartGame();
     });
+  }
+
+  initGame() {
+    // Limpiar los elementos y reiniciar
+    if (this.personaje) {
+        this.container.removeChild(this.personaje.element);
+    }
+    this.monedas.forEach(moneda => this.container.removeChild(moneda.element));
+    this.monedas = []; // Limpiar los arrays de las monedas
+
+    this.puntuacion = 0;
+    this.actualizarPuntuacion(0); // Reset puntuacion
+    this.overlay.style.display = 'none'; // Esconder mensaje de ganaste
+
+    // Reset and start timer
+    clearInterval(this.timerInterval); // Limpiar timer
+    this.setTime = Date.now();
+    this.timerElement.textContent = 0; // Reset tiempo
+    this.updateTime();
+
+    this.crearEscenario();
+    bgMusic.currentTime = 0; // Reset musica
+    bgMusic.play();
   }
 
   crearEscenario() {
     this.personaje = new Personaje();
     this.container.appendChild(this.personaje.element);
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 10; i++) {
       const moneda = new Moneda();
       this.monedas.push(moneda);
       this.container.appendChild(moneda.element);
     }
   }
 
-    updateTime() {
-      setInterval(() => {
-        const time = Math.floor((Date.now() - this. setTime) / 1000);
-        this.timerElement.textContent = time;
-      }, 1000);
-    }
+  updateTime() {
+    // Almacenar el intervalo que luego se puede limpiar
+    this.timerInterval = setInterval(() => {
+      const time = Math.floor((Date.now() - this.setTime) / 1000);
+      this.timerElement.textContent = time;
+    }, 1000);
+  }
 
   agregarEventos() {
     window.addEventListener("keydown", (e) => this.personaje.mover(e));
@@ -81,23 +107,30 @@ class Game {
 
           if (this.monedas.length === 0) {
             this.mostrarVentanaGanadora();
+            // Parar el timer cuando consigas las monedas
+            clearInterval(this.timerInterval);
+          }
         }
-      }
       });
     }, 1000 / 60); // 60 fps
   }
 
   mostrarVentanaGanadora() {
-        this.overlay.style.display = 'flex';
-        const winMessage = document.getElementById('win-message'); 
-        this.gameStarted = false; 
-  }
+    this.overlay.style.display = 'flex';
+    const winMessage = document.getElementById('win-message');
+    winMessage.textContent = `🥳 ¡Felicidades ${this.timerElement.textContent} segundos!`;
+    this.gameStarted = false;
+   }
 
   actualizarPuntuacion(puntos) {
     this.puntuacion += puntos;
     this.puntosElement.textContent = `Puntos: ${this.puntuacion}`;
   }
-  
+
+  restartGame() {
+        this.initGame(); // Reiniciar el juego
+  }
+
 }
 
 
@@ -176,11 +209,11 @@ class Personaje {
     }
 
     //Que no se salga de los margenes
-    if(this.x < 0 ) {
+    if (this.x < 0) {
       this.x = 0;
-    } 
+    }
 
-    if(this.x > ANCHO - this.width) {
+    if (this.x > ANCHO - this.width) {
       this.x = ANCHO - this.width;
     }
 
